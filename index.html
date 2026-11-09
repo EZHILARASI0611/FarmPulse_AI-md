@@ -1,0 +1,747 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmPulse AI | Smart Agriculture Platform</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">🌱</div>
+            <div>
+                <h2>FarmPulse<span> AI</span></h2>
+                <p>Smart Agriculture Platform</p>
+            </div>
+        </div>
+
+        <div class="menu-label">MAIN MENU</div>
+
+        <nav>
+            <a href="#" class="nav-link active" data-page="dashboard">
+                <span>▦</span> Dashboard
+            </a>
+
+            <a href="#" class="nav-link" data-page="crop-health">
+                <span>🌿</span> Crop Health Analyzer
+            </a>
+
+            <a href="#" class="nav-link" data-page="irrigation">
+                <span>💧</span> Smart Irrigation
+            </a>
+
+            <a href="#" class="nav-link" data-page="harvest">
+                <span>🌾</span> Harvest Predictor
+            </a>
+
+            <a href="#" class="nav-link" data-page="freshness">
+                <span>🥬</span> Food Freshness
+            </a>
+
+            <a href="#" class="nav-link" data-page="market">
+                <span>📈</span> Market Intelligence
+            </a>
+
+            <a href="#" class="nav-link" data-page="reports">
+                <span>📊</span> Reports & Analytics
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="help-card">
+                <span>🌍</span>
+                <h3>Smart Farming</h3>
+                <p>Making agriculture smarter and more sustainable.</p>
+            </div>
+            <p class="version">FarmPulse AI · Version 1.0</p>
+        </div>
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- TOP HEADER -->
+        <header class="topbar">
+            <div>
+                <p class="breadcrumb">FarmPulse AI / <span id="breadcrumb-page">Dashboard</span></p>
+                <h2 id="page-heading">Dashboard Overview</h2>
+            </div>
+
+            <div class="topbar-right">
+                <div class="system-status">
+                    <span class="online-dot"></span>
+                    System Active
+                </div>
+                <div class="profile">
+                    <div class="profile-icon">F</div>
+                    <div>
+                        <strong>Farm Manager</strong>
+                        <small>Administrator</small>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <section class="page active" id="dashboard">
+
+            <div class="welcome-banner">
+                <div>
+                    <span class="welcome-tag">AGRICULTURE INTELLIGENCE</span>
+                    <h1>Welcome to FarmPulse AI 👋</h1>
+                    <p>Monitor crop health, optimize farming and protect food quality.</p>
+                </div>
+                <div class="banner-illustration">🌾</div>
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <h3>Farm Overview</h3>
+                    <p>Here is your agricultural activity summary.</p>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <div class="stat-icon green">🌱</div>
+                        <span class="stat-label">Registered Crops</span>
+                    </div>
+                    <h2 id="total-crops">0</h2>
+                    <p>Crop records added</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <div class="stat-icon blue">💧</div>
+                        <span class="stat-label">Irrigation Checks</span>
+                    </div>
+                    <h2 id="total-irrigation">0</h2>
+                    <p>Advisory assessments</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <div class="stat-icon orange">🌾</div>
+                        <span class="stat-label">Harvest Ready</span>
+                    </div>
+                    <h2 id="harvest-ready">0</h2>
+                    <p>Ready crop records</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <div class="stat-icon purple">🥬</div>
+                        <span class="stat-label">Food Assessments</span>
+                    </div>
+                    <h2 id="total-freshness">0</h2>
+                    <p>Freshness checks</p>
+                </div>
+
+            </div>
+
+            <div class="dashboard-grid">
+
+                <div class="content-card">
+                    <div class="card-heading">
+                        <div>
+                            <h3>Crop Registration Overview</h3>
+                            <p>Distribution of registered crops</p>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="cropChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-heading">
+                        <div>
+                            <h3>Farm Activity</h3>
+                            <p>Latest platform assessments</p>
+                        </div>
+                    </div>
+                    <div class="activity-list" id="recent-activity">
+                        <div class="empty-state">No activities yet. Start by registering a crop.</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="content-card">
+                <div class="card-heading">
+                    <div>
+                        <h3>Recent Crop Records</h3>
+                        <p>Recently registered agricultural crops</p>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Crop Name</th>
+                                <th>Farm Location</th>
+                                <th>Area (Acres)</th>
+                                <th>Crop Stage</th>
+                                <th>Date Added</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recent-crops">
+                            <tr><td colspan="5" class="empty-cell">No crop records available.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ================= CROP HEALTH ================= -->
+
+        <section class="page" id="crop-health">
+
+            <div class="page-intro">
+                <span class="module-tag">MODULE 01</span>
+                <h1>Crop Health Analyzer 🌿</h1>
+                <p>Record crop observations and receive preliminary symptom-based guidance.</p>
+            </div>
+
+            <div class="module-grid">
+
+                <div class="content-card">
+                    <h3>Crop Observation Details</h3>
+                    <p class="card-subtitle">Enter the details of your crop.</p>
+
+                    <form id="cropForm">
+
+                        <label>Crop Name</label>
+                        <select id="cropName" required>
+                            <option value="">Select Crop</option>
+                            <option>Tomato</option>
+                            <option>Rice</option>
+                            <option>Wheat</option>
+                            <option>Potato</option>
+                            <option>Cotton</option>
+                            <option>Maize</option>
+                            <option>Chilli</option>
+                            <option>Brinjal</option>
+                            <option>Other</option>
+                        </select>
+
+                        <label>Farm Location</label>
+                        <input type="text" id="cropLocation" placeholder="Example: Coimbatore" required>
+
+                        <label>Farm Area (Acres)</label>
+                        <input type="number" id="cropArea" min="0.1" step="0.1" placeholder="Enter area" required>
+
+                        <label>Crop Growth Stage</label>
+                        <select id="cropStage" required>
+                            <option value="">Select Stage</option>
+                            <option>Seedling</option>
+                            <option>Vegetative</option>
+                            <option>Flowering</option>
+                            <option>Fruiting</option>
+                            <option>Maturity</option>
+                        </select>
+
+                        <label>Observed Crop Symptoms</label>
+                        <select id="cropSymptom" required>
+                            <option value="">Select Observation</option>
+                            <option value="healthy">Healthy Green Leaves</option>
+                            <option value="yellow">Yellowing Leaves</option>
+                            <option value="spots">Brown or Black Spots</option>
+                            <option value="wilting">Leaf Wilting</option>
+                            <option value="curling">Leaf Curling</option>
+                        </select>
+
+                        <button type="submit" class="primary-btn">Analyze Crop Health</button>
+                    </form>
+                </div>
+
+                <div class="content-card result-panel">
+                    <div class="result-icon">🔬</div>
+                    <h3>Crop Health Analysis</h3>
+                    <p class="card-subtitle">Your analysis results will appear here.</p>
+                    <div id="cropResult" class="result-output">
+                        <p>Complete the crop observation form to receive preliminary guidance.</p>
+                    </div>
+                    <div class="notice">
+                        <strong>Note:</strong> This is a rule-based educational assessment, not a confirmed disease diagnosis.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="content-card">
+                <h3>Registered Crop Records</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Crop</th>
+                                <th>Location</th>
+                                <th>Area</th>
+                                <th>Growth Stage</th>
+                                <th>Observation</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="crop-records">
+                            <tr><td colspan="6" class="empty-cell">No crop records available.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ================= IRRIGATION ================= -->
+
+        <section class="page" id="irrigation">
+
+            <div class="page-intro">
+                <span class="module-tag">MODULE 02</span>
+                <h1>Smart Irrigation Advisor 💧</h1>
+                <p>Evaluate soil moisture and environmental conditions to receive watering guidance.</p>
+            </div>
+
+            <div class="module-grid">
+
+                <div class="content-card">
+                    <h3>Irrigation Assessment</h3>
+                    <p class="card-subtitle">Enter current farm conditions.</p>
+
+                    <form id="irrigationForm">
+
+                        <label>Crop Name</label>
+                        <select id="irrigationCrop" required>
+                            <option value="">Select Crop</option>
+                            <option>Rice</option>
+                            <option>Wheat</option>
+                            <option>Tomato</option>
+                            <option>Maize</option>
+                            <option>Cotton</option>
+                            <option>Potato</option>
+                            <option>Other</option>
+                        </select>
+
+                        <label>Soil Moisture (%)</label>
+                        <input type="number" id="soilMoisture" min="0" max="100" placeholder="Example: 25" required>
+
+                        <label>Temperature (°C)</label>
+                        <input type="number" id="soilTemperature" min="-10" max="60" placeholder="Example: 32" required>
+
+                        <label>Recent Rainfall (mm)</label>
+                        <input type="number" id="rainfall" min="0" placeholder="Example: 5" required>
+
+                        <label>Soil Type</label>
+                        <select id="soilType" required>
+                            <option value="">Select Soil Type</option>
+                            <option>Clay</option>
+                            <option>Sandy</option>
+                            <option>Loamy</option>
+                            <option>Black Soil</option>
+                            <option>Red Soil</option>
+                        </select>
+
+                        <button type="submit" class="primary-btn">Get Irrigation Advice</button>
+                    </form>
+                </div>
+
+                <div class="content-card result-panel">
+                    <div class="result-icon">💧</div>
+                    <h3>Irrigation Recommendation</h3>
+                    <p class="card-subtitle">Smart watering guidance</p>
+                    <div id="irrigationResult" class="result-output">
+                        <p>Enter your farm conditions to get an irrigation recommendation.</p>
+                    </div>
+                    <div class="notice">
+                        <strong>Note:</strong> Recommendations are estimates based on entered values, not live sensor readings.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="content-card">
+                <h3>Irrigation Assessment History</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Crop</th>
+                                <th>Moisture</th>
+                                <th>Temperature</th>
+                                <th>Rainfall</th>
+                                <th>Recommendation</th>
+                            </tr>
+                        </thead>
+                        <tbody id="irrigation-records">
+                            <tr><td colspan="5" class="empty-cell">No irrigation assessments yet.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ================= HARVEST PREDICTOR ================= -->
+
+        <section class="page" id="harvest">
+
+            <div class="page-intro">
+                <span class="module-tag">MODULE 03</span>
+                <h1>Harvest Readiness Predictor 🌾</h1>
+                <p>Estimate crop harvest readiness using growth stage and crop maturity inputs.</p>
+            </div>
+
+            <div class="module-grid">
+
+                <div class="content-card">
+                    <h3>Harvest Prediction Details</h3>
+                    <p class="card-subtitle">Provide your crop growth information.</p>
+
+                    <form id="harvestForm">
+
+                        <label>Crop Name</label>
+                        <select id="harvestCrop" required>
+                            <option value="">Select Crop</option>
+                            <option>Tomato</option>
+                            <option>Rice</option>
+                            <option>Wheat</option>
+                            <option>Maize</option>
+                            <option>Potato</option>
+                            <option>Cotton</option>
+                            <option>Other</option>
+                        </select>
+
+                        <label>Days Since Planting</label>
+                        <input type="number" id="plantingDays" min="0" placeholder="Example: 70" required>
+
+                        <label>Expected Crop Duration (Days)</label>
+                        <input type="number" id="cropDuration" min="1" placeholder="Example: 90" required>
+
+                        <label>Crop Growth Stage</label>
+                        <select id="harvestStage" required>
+                            <option value="">Select Stage</option>
+                            <option>Seedling</option>
+                            <option>Vegetative</option>
+                            <option>Flowering</option>
+                            <option>Fruiting</option>
+                            <option>Maturity</option>
+                        </select>
+
+                        <label>Crop Appearance</label>
+                        <select id="cropAppearance" required>
+                            <option value="">Select Appearance</option>
+                            <option value="green">Green / Developing</option>
+                            <option value="changing">Changing Colour</option>
+                            <option value="mature">Mature Appearance</option>
+                        </select>
+
+                        <button type="submit" class="primary-btn">Predict Harvest Readiness</button>
+                    </form>
+                </div>
+
+                <div class="content-card result-panel">
+                    <div class="result-icon">🌾</div>
+                    <h3>Harvest Prediction</h3>
+                    <p class="card-subtitle">Estimated maturity assessment</p>
+                    <div id="harvestResult" class="result-output">
+                        <p>Enter crop details to estimate harvest readiness.</p>
+                    </div>
+                    <div class="notice">
+                        <strong>Note:</strong> This is an indicative estimate. Actual harvest timing depends on crop variety, local conditions and field inspection.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="content-card">
+                <h3>Harvest Prediction History</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Crop</th>
+                                <th>Days Planted</th>
+                                <th>Expected Duration</th>
+                                <th>Readiness</th>
+                                <th>Estimated Days Left</th>
+                            </tr>
+                        </thead>
+                        <tbody id="harvest-records">
+                            <tr><td colspan="5" class="empty-cell">No harvest predictions yet.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ================= FOOD FRESHNESS ================= -->
+
+        <section class="page" id="freshness">
+
+            <div class="page-intro">
+                <span class="module-tag">MODULE 04</span>
+                <h1>Food Freshness Analyzer 🥬</h1>
+                <p>Evaluate food storage conditions and estimate freshness-related risk.</p>
+            </div>
+
+            <div class="module-grid">
+
+                <div class="content-card">
+                    <h3>Food Quality Assessment</h3>
+                    <p class="card-subtitle">Enter the storage and product details.</p>
+
+                    <form id="freshnessForm">
+
+                        <label>Food Category</label>
+                        <select id="foodCategory" required>
+                            <option value="">Select Category</option>
+                            <option>Vegetables</option>
+                            <option>Fruits</option>
+                            <option>Grains</option>
+                            <option>Dairy</option>
+                            <option>Other</option>
+                        </select>
+
+                        <label>Food Product</label>
+                        <input type="text" id="foodProduct" placeholder="Example: Tomato" required>
+
+                        <label>Storage Duration (Days)</label>
+                        <input type="number" id="storageDuration" min="0" placeholder="Example: 4" required>
+
+                        <label>Storage Temperature (°C)</label>
+                        <input type="number" id="storageTemperature" min="-30" max="70" placeholder="Example: 12" required>
+
+                        <label>Visible Appearance</label>
+                        <select id="foodAppearance" required>
+                            <option value="">Select Appearance</option>
+                            <option value="fresh">Fresh Appearance</option>
+                            <option value="slight">Slight Changes</option>
+                            <option value="damaged">Visible Damage</option>
+                        </select>
+
+                        <button type="submit" class="primary-btn">Analyze Food Freshness</button>
+                    </form>
+                </div>
+
+                <div class="content-card result-panel">
+                    <div class="result-icon">🥬</div>
+                    <h3>Freshness Assessment</h3>
+                    <p class="card-subtitle">Food storage analysis</p>
+                    <div id="freshnessResult" class="result-output">
+                        <p>Enter food details to receive a preliminary freshness risk estimate.</p>
+                    </div>
+                    <div class="notice">
+                        <strong>Safety notice:</strong> This estimate cannot establish whether food is safe to eat. Never consume food with signs of spoilage or uncertain storage history.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="content-card">
+                <h3>Food Assessment History</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Category</th>
+                                <th>Storage Days</th>
+                                <th>Temperature</th>
+                                <th>Risk Estimate</th>
+                            </tr>
+                        </thead>
+                        <tbody id="freshness-records">
+                            <tr><td colspan="5" class="empty-cell">No food assessments yet.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ================= MARKET INTELLIGENCE ================= -->
+
+        <section class="page" id="market">
+
+            <div class="page-intro">
+                <span class="module-tag">MODULE 05</span>
+                <h1>Market Price Intelligence 📈</h1>
+                <p>Compare crop prices and estimate potential selling value.</p>
+            </div>
+
+            <div class="module-grid">
+
+                <div class="content-card">
+                    <h3>Crop Price Analysis</h3>
+                    <p class="card-subtitle">Enter current and comparison prices.</p>
+
+                    <form id="marketForm">
+
+                        <label>Crop Name</label>
+                        <select id="marketCrop" required>
+                            <option value="">Select Crop</option>
+                            <option>Tomato</option>
+                            <option>Rice</option>
+                            <option>Wheat</option>
+                            <option>Potato</option>
+                            <option>Onion</option>
+                            <option>Maize</option>
+                            <option>Cotton</option>
+                            <option>Other</option>
+                        </select>
+
+                        <label>Quantity Available (Kg)</label>
+                        <input type="number" id="marketQuantity" min="1" placeholder="Example: 500" required>
+
+                        <label>Current Selling Price (₹ / Kg)</label>
+                        <input type="number" id="currentPrice" min="0.01" step="0.01" placeholder="Example: 25" required>
+
+                        <label>Comparison Price (₹ / Kg)</label>
+                        <input type="number" id="comparisonPrice" min="0.01" step="0.01" placeholder="Example: 20" required>
+
+                        <button type="submit" class="primary-btn">Analyze Market Price</button>
+                    </form>
+                </div>
+
+                <div class="content-card result-panel">
+                    <div class="result-icon">📊</div>
+                    <h3>Market Intelligence Report</h3>
+                    <p class="card-subtitle">Price comparison and revenue estimate</p>
+                    <div id="marketResult" class="result-output">
+                        <p>Enter crop prices to generate your market analysis.</p>
+                    </div>
+                    <div class="notice">
+                        <strong>Note:</strong> Prices are supplied by the user. This prototype does not fetch live market prices.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="content-card">
+                <h3>Market Analysis History</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Crop</th>
+                                <th>Quantity</th>
+                                <th>Current Price</th>
+                                <th>Comparison Price</th>
+                                <th>Estimated Value</th>
+                            </tr>
+                        </thead>
+                        <tbody id="market-records">
+                            <tr><td colspan="5" class="empty-cell">No market analyses yet.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ================= REPORTS ================= -->
+
+        <section class="page" id="reports">
+
+            <div class="page-intro">
+                <span class="module-tag">MODULE 06</span>
+                <h1>Reports & Analytics 📊</h1>
+                <p>Review your farm assessments and agricultural performance.</p>
+            </div>
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <div class="stat-icon green">🌱</div>
+                        <span class="stat-label">Crop Records</span>
+                    </div>
+                    <h2 id="report-crops">0</h2>
+                    <p>Total registered crops</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <div class="stat-icon blue">💧</div>
+                        <span class="stat-label">Irrigation</span>
+                    </div>
+                    <h2 id="report-irrigation">0</h2>
+                    <p>Total assessments</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <div class="stat-icon orange">🌾</div>
+                        <span class="stat-label">Harvest Checks</span>
+                    </div>
+                    <h2 id="report-harvest">0</h2>
+                    <p>Total predictions</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <div class="stat-icon purple">🥬</div>
+                        <span class="stat-label">Food Checks</span>
+                    </div>
+                    <h2 id="report-freshness">0</h2>
+                    <p>Total assessments</p>
+                </div>
+
+            </div>
+
+            <div class="content-card">
+                <div class="card-heading">
+                    <div>
+                        <h3>Farm Performance Overview</h3>
+                        <p>Visual summary of your activities</p>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="reportChart"></canvas>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h3>Project Impact Summary</h3>
+                <div id="impact-summary">
+                    Your farm activity summary will appear here after assessments.
+                </div>
+                <button id="exportBtn" class="primary-btn">⬇ Export Report as CSV</button>
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <p>© 2026 FarmPulse AI · Smart Agriculture & Food Quality Intelligence</p>
+            <span>Designed for Sustainable Agriculture 🌱</span>
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
